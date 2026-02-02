@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valentine?</title>
+  <style>
+    :root{
+      --bg: #0b0b10;
+      --card: rgba(255,255,255,0.10);
+      --border: rgba(255,255,255,0.18);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.8);
+      --pink: #ff4d88;
+      --pink2: #ff7aa8;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,77,136,0.25), transparent 45%),
+        radial-gradient(circle at 80% 30%, rgba(255,122,168,0.18), transparent 45%),
+        radial-gradient(circle at 40% 90%, rgba(255,255,255,0.08), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow:hidden;
+    }
+
+    .card{
+      width:min(820px, 92vw);
+      padding: 22px;
+      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+      backdrop-filter: blur(10px);
+    }
+
+    .screen{ display:none; }
+    .screen.active{ display:block; }
+
+    .title{
+      text-align:center;
+      font-size: clamp(22px, 4vw, 40px);
+      margin: 6px 0 10px;
+      font-weight: 900;
+      letter-spacing: 0.2px;
+    }
+    .subtitle{
+      text-align:center;
+      color: var(--muted);
+      margin: 0 0 14px;
+      font-size: clamp(14px, 2vw, 18px);
+      font-weight: 650;
+    }
+
+    .gifWrap{
+      display:flex;
+      justify-content:center;
+      margin: 10px 0 16px;
+    }
+    .gifWrap img{
+      width: min(420px, 84vw);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+
+    .btnRow{
+      display:flex;
+      gap: 14px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    .btn{
+      border:none;
+      border-radius: 999px;
+      padding: 14px 26px;
+      font-size: 18px;
+      font-weight: 900;
+      cursor:pointer;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+      transition: transform 0.08s ease, filter 0.15s ease;
+    }
+    .btn:active{ transform: scale(0.98); }
+
+    .yes{
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      color: #fff;
+    }
+    .no{
+      background: rgba(255,255,255,0.12);
+      color:#fff;
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .no:hover{ filter: brightness(1.08); }
+
+    .finalTitle{
+      text-align:center;
+      font-size: clamp(26px, 4.5vw, 48px);
+      font-weight: 1000;
+      margin: 10px 0 10px;
+    }
+    .hearts{
+      text-align:center;
+      font-size: 26px;
+      margin: 4px 0 12px;
+      letter-spacing: 6px;
+    }
+    .finalSub{
+      text-align:center;
+      font-size: clamp(16px, 2.5vw, 22px);
+      color: var(--muted);
+      font-weight: 800;
+      margin: 6px 0 4px;
+    }
+
+    .hint{
+      text-align:center;
+      margin-top: 10px;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+    }
+
+    /* floating hearts effect */
+    .heart{
+      position: fixed;
+      pointer-events:none;
+      font-size: 18px;
+      animation: floatUp 1.1s ease-out forwards;
+      filter: drop-shadow(0 10px 12px rgba(0,0,0,0.35));
+    }
+    @keyframes floatUp{
+      0%{ transform: translateY(0) scale(1); opacity: 1; }
+      100%{ transform: translateY(-140px) scale(1.6); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+
+    <!-- SCREEN 1 -->
+    <section class="screen active" id="screen1">
+      <div class="gifWrap">
+        <img src="dancing.gif" alt="dancing" />
+      </div>
+
+      <div class="title">Will you be my Valentine? 💘</div>
+      <div class="subtitle">PweashPweashPweashh</div>
+
+      <div class="btnRow">
+        <button class="btn yes" id="s1yes">Yes 💗</button>
+        <button class="btn no"  id="s1no">No 😭</button>
+      </div>
+
+      <div class="hint">Dun click no pweash</div>
+    </section>
+
+    <!-- SCREEN 2 -->
+    <section class="screen" id="screen2">
+      <div class="gifWrap">
+        <img src="gun.gif" alt="gun" />
+      </div>
+
+      <div class="title">Are you sure? 😐</div>
+      <div class="subtitle">last chance…</div>
+
+      <div class="btnRow">
+        <button class="btn yes" id="s2yes">Yes 😳</button>
+        <button class="btn no"  id="s2no">No 🙃</button>
+      </div>
+
+      <div class="hint">If you click “Yes”… you know what happens 💘</div>
+    </section>
+
+    <!-- SCREEN 3 -->
+    <section class="screen" id="screen3">
+      <div class="gifWrap">
+        <img src="YAY.gif" alt="yay" />
+      </div>
+
+      <div class="finalTitle">YAYYYYYYYYYYYYYYYY</div>
+      <div class="hearts">💗 💗 💗 💗 💗</div>
+      <div class="finalSub">Meet chu at chur haus 14th Febuwawy umm maybe 3 o cwokkk:3</div>
+    </section>
+
+  </div>
+
+  <script>
+    const screen1 = document.getElementById("screen1");
+    const screen2 = document.getElementById("screen2");
+    const screen3 = document.getElementById("screen3");
+
+    const s1yes = document.getElementById("s1yes");
+    const s1no  = document.getElementById("s1no");
+    const s2yes = document.getElementById("s2yes");
+    const s2no  = document.getElementById("s2no");
+
+    function show(screen){
+      screen1.classList.remove("active");
+      screen2.classList.remove("active");
+      screen3.classList.remove("active");
+      screen.classList.add("active");
+    }
+
+    // hearts pop
+    function popHearts(x, y){
+      const emojis = ["💖","💘","💝","💕","💗","💞","😍"];
+      for (let i = 0; i < 7; i++){
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        h.style.left = (x + (Math.random()*40 - 20)) + "px";
+        h.style.top  = (y + (Math.random()*20 - 10)) + "px";
+        h.style.animationDelay = (Math.random()*0.08) + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 1300);
+      }
+    }
+
+    // Screen 1 actions
+    s1yes.addEventListener("click", (e) => {
+      popHearts(e.clientX, e.clientY);
+      show(screen3);
+    });
+
+    s1no.addEventListener("click", (e) => {
+      popHearts(e.clientX, e.clientY);
+      show(screen2);
+    });
+
+    // Screen 2 actions
+    s2yes.addEventListener("click", (e) => {
+      popHearts(e.clientX, e.clientY);
+      show(screen3);
+    });
+
+    // If they press "No" on Are you sure?, go back to the first page
+    s2no.addEventListener("click", (e) => {
+      popHearts(e.clientX, e.clientY);
+      show(screen1);
+    });
+  </script>
+</body>
+</html>
